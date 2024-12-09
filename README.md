@@ -2,23 +2,26 @@
 
 I just read an article about rules for passwords and it made some sense but it glaring errors. I said you should generate a long passwords, at least 20 characters long. Ok that makes sense. Maybe a little short for the future. But it said that random passwords are too difficult to remember so you should use an XKCD type password of words strung together with hyphens.
 
-- The article implied that you would have a 'my password' that you use on all accounts, since you need to remember it. Horrible.
+- The article implied that you would have a 'my password' that you use on all accounts, since you need to remember it. _Horrible_.
 
-Some other ideas from google search:
+Some other recommendations from google search:
 
-- In a list from UC Santa Barbara said 'create a password that's hard to guess but easy to remember'. Horrible.
-- Never write your password down. Horrible.
+- In a list from UC Santa Barbara
+  - create a password that's hard to guess but easy to remember. _Horrible_
+  - Never write your password down. _Horrible_
 
 Here's my personal guidelines for a password:
 
-- use different passwords for different accounts (of course)
-- passwords should be at least 20 characters long, preferable more. I use 24 but 30 is better.
-- use a password that is hard/infeasible to crack (crytographically random), with letters, numbers and optionally symbols. No words or garbled words.
+- if you use a 'my password' for everything, you will get hacked. It's only a matter of time.
+- never use the same password for different accounts (of course)
+- passwords should be at least 24 characters long, preferably more. 30 is better. The future is coming.
+- use a password that is hard/infeasible to crack (crytographically random), with letters, numbers and optionally symbols. No words or garbled words. According to NIST, if you have a long enought password, like 24 characters, symbols are not really needed. I use them if I have to.
 - use a password manager. don't try to remember your passwords unless you are one of those rare people who can recall Pi to hundreds of numbers.
+- keep a printed list of my passwords in a secure location.
 
 And of course you want to use MFA and passkeys if possible.
 
-One thing missing is how to generate passwords that meet my criteria. I usually passwordgenerator.net. There are dozens of others on line. But do you know that the web app generating your password is not storing it anywhere? Saving it for some other use? You don't really know unless you generate one locally (assuming your computer is secure lol).
+One thing missing is how to generate passwords that meet my criteria. I usually passwordgenerator.net. There are dozens of others on line. **But how do you know that the web app generating your password is not storing it somewhere? Saving it for some other use? You don't really know**. Has any password managers been cracked? Uh..Lastpass? Unless you generate passwords and store them securely(assuming your computer is secure lol).
 
 ## Build and Test
 
@@ -68,3 +71,5 @@ Finally I switched back to aider and added a modification to the output:
 ## Conclusion
 
 Now I can generate my own passwords, print the output if I want to. But, I would never store the passwords in the clear on my computer(s). I would use a password manager to store them or just keep a printout handly.
+
+Using this tool, I typically create a page full of the pregenerated passwords and keep it in a secure location. Then when I need to add a new password, I use the next one on the list, write something so I'll know what site/app it is used for. Add it to the password manager and lock up the printout.
