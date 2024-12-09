@@ -21,7 +21,7 @@ Here's my personal guidelines for a password:
 
 And of course you want to use MFA and passkeys if possible.
 
-One thing missing is how to generate passwords that meet my criteria. I usually passwordgenerator.net. There are dozens of others on line. **But how do you know that the web app generating your password is not storing it somewhere? Saving it for some other use? You don't really know**. Has any password managers been cracked? Uh..Lastpass? Unless you generate passwords and store them securely(assuming your computer is secure lol).
+One thing missing is how to generate passwords that meet my criteria. I usually passwordgenerator.net. There are dozens of others on line. **But how do you know that the web app generating your password is not storing it somewhere? Saving it for some other use? You don't really know**. Has any password manager been cracked? Uh..Lastpass? Unless you generate passwords and store them securely(assuming your computer is secure lol).
 
 ## Build and Test
 
