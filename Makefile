@@ -18,7 +18,13 @@ BUILD_TIME=$(shell date +%FT%T%z)
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 
 # Default target
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := default
+
+# Build for current platform
+.PHONY: default
+default: $(BUILD_DIR)
+	$(eval BINARY := $(if $(filter windows,$(OS)),passwordgen.exe,passwordgen))
+	GOOS=$(OS) $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY) main.go
 
 # Create build directory
 $(BUILD_DIR):
