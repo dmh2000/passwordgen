@@ -47,8 +47,7 @@ using the Go programming language, create a command line application that genera
 
 The program builds and runs on linux with out modification. I added additional prompts:
 
-- create a Makefile that builds main.go with options for linux, macOS or windows. the makefile shoul
-  d default to building for linux
+- create a Makefile that builds main.go with options for linux, macOS or windows. the makefile shoul d default to building for linux (because me)
   - the Makefile had a warning so I fixed it by hand
 - create a test file using the Golang test framework. test all options
   - the test file seems to check everything
