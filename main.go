@@ -54,7 +54,7 @@ func main() {
 	for i := 0; i < passwordCount; i++ {
 		password := generatePassword(passwordLength, *symbols || *symbolsLong)
 		fmt.Println()
-		fmt.Println(strings.Repeat("-", 80))
+		fmt.Println(strings.Repeat("-", 40))
 		fmt.Println(password)
 		fmt.Println(formatPassword(password))
 	}

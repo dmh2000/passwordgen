@@ -37,10 +37,13 @@ clean:
 
 # Build targets for specific platforms
 .PHONY: linux macos windows
-linux macos windows: $(BUILD_DIR)
+linux macos: $(BUILD_DIR)
 	$(eval OS := $(if $(filter windows,$@),windows,$(if $(filter macos,$@),darwin,linux)))
 	$(eval BINARY := $(if $(filter windows,$@),passwordgen.exe,passwordgen))
 	GOOS=$(OS) $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY) main.go
+
+windows: $(BUILD_DIR)
+	GOOS=windows $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/passwordgen.exe main.go
 
 # Build for all platforms
 .PHONY: all
