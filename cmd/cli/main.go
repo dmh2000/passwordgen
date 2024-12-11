@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -47,8 +48,7 @@ func main() {
 
 	// Validate minimum length
 	if passwordLength < minLength {
-		fmt.Fprintf(os.Stderr, "Password length must be at least %d characters\n", minLength)
-		os.Exit(1)
+		log.Fatalf("Password length must be at least %d characters\n", minLength)
 	}
 
 	// Generate passwords

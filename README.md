@@ -67,6 +67,27 @@ Finally I switched back to aider and added a modification to the output:
 - change the output to have 4 lines per password. the first line is blank, the second line is a stri
   ng of hyphens of lenght 80, and then existing output
 
+### Web App
+
+After building the cli tool, I decided to build a web app also since some folks might want to use it that way. Again, I used Aider and Anthropic Claude-3.5.sonnet. I added a prompt:
+
+```
+using the Go programming language, create a web application that generates one or more passwords with the criteria:
+
+- has a way for user to input the length of the password. default to 24 if not specified.
+- has a way for user to input the number of passwords to generate. default to 1 if not specified.
+- has a way for user tp specifiy if symbols are to be included in the passworld.By default the password should only include ASCII letters and numbers.
+- minimum length of 24 characters
+- cryptographically random
+- output the results to stdout with 2 lines per password: one line for the complete password and a second line where the password is broken up into 3 character sections divided by a space. add a line feed between each pairs of lines.
+- use the Golang crypto/rand package to generate the passwords.
+- use the library in internal/pwd to generate and format passwords.
+- the index web page should use html,css and javascript.
+- create a web server that serves the index page using golang net/http
+- embed the html, css and javascript assets in the binary
+- create a Makefile that builds main.go with options for linux, macOS or windows. the makefile shoul d default to building for linux
+```
+
 ## Conclusion
 
 Now I can generate my own passwords, print the output if I want to. But, I would never store the passwords in the clear on my computer(s). I would use a password manager to store them or just keep a printout handly.
