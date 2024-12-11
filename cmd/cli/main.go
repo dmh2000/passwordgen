@@ -1,11 +1,12 @@
 package main
 
 import (
-	"crypto/rand"
 	"flag"
 	"fmt"
 	"os"
 	"strings"
+
+	pwd "sqirvy.xyz/passwords/internal/pwd"
 )
 
 const (
@@ -52,54 +53,10 @@ func main() {
 
 	// Generate passwords
 	for i := 0; i < passwordCount; i++ {
-		password := generatePassword(passwordLength, *symbols || *symbolsLong)
+		password := pwd.GeneratePassword(passwordLength, *symbols || *symbolsLong)
 		fmt.Println()
 		fmt.Println(strings.Repeat("-", 80))
 		fmt.Println(password)
-		fmt.Println(formatPassword(password))
+		fmt.Println(pwd.FormatPassword(password))
 	}
-}
-
-func generatePassword(length int, includeSymbols bool) string {
-	const (
-		letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		numbers = "0123456789"
-		symbols = "!@#$%^&*()-_=+[]{}|;:,.<>?"
-	)
-
-	// Create character set
-	charset := letters + numbers
-	if includeSymbols {
-		charset += symbols
-	}
-
-	// Generate password
-	password := make([]byte, length)
-	charsetLen := len(charset)
-
-	for i := 0; i < length; i++ {
-		randomBytes := make([]byte, 1)
-		_, err := rand.Read(randomBytes)
-		if err != nil {
-			panic(err)
-		}
-		password[i] = charset[int(randomBytes[0])%charsetLen]
-	}
-
-	return string(password)
-}
-
-func formatPassword(password string) string {
-	var builder strings.Builder
-	for i := 0; i < len(password); i += 3 {
-		if i > 0 {
-			builder.WriteString(" ")
-		}
-		end := i + 3
-		if end > len(password) {
-			end = len(password)
-		}
-		builder.WriteString(password[i:end])
-	}
-	return builder.String()
 }
