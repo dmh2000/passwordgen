@@ -23,8 +23,9 @@ LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 # Build for current platform
 .PHONY: default
 default: $(BUILD_DIR)
+	$(eval XOS := $(if $(filter windows,$(OS)),windows,$(OS)))
 	$(eval BINARY := $(if $(filter windows,$(OS)),passwordgen.exe,passwordgen))
-	GOOS=$(OS) $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY) main.go
+	GOOS=$(XOS) $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY) main.go
 
 # Create build directory
 $(BUILD_DIR):
@@ -36,11 +37,15 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 # Build targets for specific platforms
-.PHONY: linux macos windows
-linux macos windows: $(BUILD_DIR)
+.PHONY: linux macos 
+linux macos : $(BUILD_DIR)
 	$(eval OS := $(if $(filter windows,$@),windows,$(if $(filter macos,$@),darwin,linux)))
 	$(eval BINARY := $(if $(filter windows,$@),passwordgen.exe,passwordgen))
 	GOOS=$(OS) $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY) main.go
+
+.PHONY: windows
+windows: $(BUILD_DIR)
+	GOOS=windows $(GOBUILD) $(LDFLAGS) -o $(BUILD_DIR)/passwordgen.exe main.go
 
 # Build for all platforms
 .PHONY: all
