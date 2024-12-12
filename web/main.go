@@ -19,7 +19,7 @@ type PasswordResponse struct {
 }
 
 type Password struct {
-	Raw      string `json:"raw"`
+	Raw       string `json:"raw"`
 	Formatted string `json:"formatted"`
 }
 
@@ -40,12 +40,18 @@ func main() {
 
 	// Handle password generation
 	http.HandleFunc("/generate", func(w http.ResponseWriter, r *http.Request) {
-		length, _ := strconv.Atoi(r.URL.Query().Get("length"))
+		length, err := strconv.Atoi(r.URL.Query().Get("length"))
+		if err != nil {
+			log.Fatal(err)
+		}
 		if length < 24 {
 			length = 24
 		}
 
-		count, _ := strconv.Atoi(r.URL.Query().Get("count"))
+		count, err := strconv.Atoi(r.URL.Query().Get("count"))
+		if err != nil {
+			log.Fatal(err)
+		}
 		if count < 1 {
 			count = 1
 		}
@@ -56,7 +62,7 @@ func main() {
 		for i := 0; i < count; i++ {
 			raw := pwd.GeneratePassword(length, symbols)
 			passwords[i] = Password{
-				Raw:      raw,
+				Raw:       raw,
 				Formatted: pwd.FormatPassword(raw),
 			}
 		}
