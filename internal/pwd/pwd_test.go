@@ -1,3 +1,4 @@
+// Package pwd provides functions for generating and formatting passwords.
 package pwd
 
 import (
@@ -5,6 +6,7 @@ import (
 	"testing"
 )
 
+// TestGeneratePassword tests the GeneratePassword function.
 func TestGeneratePassword(t *testing.T) {
 	tests := []struct {
 		name           string
@@ -50,6 +52,7 @@ func TestGeneratePassword(t *testing.T) {
 	}
 }
 
+// TestFormatPassword tests the FormatPassword function.
 func TestFormatPassword(t *testing.T) {
 	tests := []struct {
 		name     string

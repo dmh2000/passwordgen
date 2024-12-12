@@ -1,3 +1,4 @@
+// Package main implements the web interface for the password generator.
 package main
 
 import (
@@ -15,10 +16,12 @@ import (
 //go:embed static/*
 var static embed.FS
 
+// PasswordResponse is the struct for the JSON response containing generated passwords.
 type PasswordResponse struct {
 	Passwords []Password `json:"passwords"`
 }
 
+// Password is the struct for a single password, including raw and formatted versions.
 type Password struct {
 	Raw       string `json:"raw"`
 	Formatted string `json:"formatted"`

@@ -1,3 +1,4 @@
+// Package pwd provides functions for generating and formatting passwords.
 package pwd
 
 import (
@@ -6,6 +7,8 @@ import (
 	"strings"
 )
 
+// GeneratePassword generates a random password of the specified length.
+// It includes letters and numbers by default, and optionally includes symbols if includeSymbols is true.
 func GeneratePassword(length int, includeSymbols bool) (string, error) {
 	const (
 		letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -35,6 +38,7 @@ func GeneratePassword(length int, includeSymbols bool) (string, error) {
 	return string(password), nil
 }
 
+// FormatPassword takes a password string and formats it by adding spaces every 3 characters.
 func FormatPassword(password string) (string, error) {
 	var builder strings.Builder
 	for i := 0; i < len(password); i += 3 {

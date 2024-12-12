@@ -1,3 +1,4 @@
+// Package main implements the command-line interface for the password generator.
 package main
 
 import (
@@ -11,9 +12,9 @@ import (
 )
 
 const (
-	minLength     = 24
-	defaultLength = 24
-	defaultCount  = 1
+	minLength     = 24  // Minimum password length
+	defaultLength = 24  // Default password length
+	defaultCount  = 1   // Default number of passwords to generate
 )
 
 func main() {
