@@ -1,5 +1,8 @@
 # Default target
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := default
+
+.PHONY: default
+default: cli web
 
 # Build CLI application
 .PHONY: cli
@@ -37,6 +40,7 @@ run-cli:
 .PHONY: help
 help:
 	@echo "Available targets:"
+	@echo "  ''       - Build both CLI and web applications for current platform (default)"
 	@echo "  all      - Build both CLI and web applications (default)"
 	@echo "  cli      - Build CLI application"
 	@echo "  web      - Build web application"
