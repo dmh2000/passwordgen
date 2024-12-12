@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -40,30 +41,51 @@ func main() {
 
 	// Handle password generation
 	http.HandleFunc("/generate", func(w http.ResponseWriter, r *http.Request) {
-		length, err := strconv.Atoi(r.URL.Query().Get("length"))
-		if err != nil {
-			log.Fatal(err)
-		}
-		if length < 24 {
-			length = 24
+		lengthStr := r.URL.Query().Get("length")
+		countStr := r.URL.Query().Get("count")
+		symbolsStr := r.URL.Query().Get("symbols")
+
+		length := 24
+		if lengthStr != "" {
+			parsedLength, err := strconv.Atoi(lengthStr)
+			if err != nil {
+				http.Error(w, "Invalid length parameter", http.StatusBadRequest)
+				return
+			}
+			if parsedLength >= 24 {
+				length = parsedLength
+			}
 		}
 
-		count, err := strconv.Atoi(r.URL.Query().Get("count"))
-		if err != nil {
-			log.Fatal(err)
-		}
-		if count < 1 {
-			count = 1
+		count := 1
+		if countStr != "" {
+			parsedCount, err := strconv.Atoi(countStr)
+			if err != nil {
+				http.Error(w, "Invalid count parameter", http.StatusBadRequest)
+				return
+			}
+			if parsedCount >= 1 {
+				count = parsedCount
+			}
 		}
 
-		symbols := r.URL.Query().Get("symbols") == "true"
+		symbols := symbolsStr == "true"
 
 		passwords := make([]Password, count)
 		for i := 0; i < count; i++ {
-			raw := pwd.GeneratePassword(length, symbols)
+			raw, err := pwd.GeneratePassword(length, symbols)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Error generating password: %v", err), http.StatusInternalServerError)
+				return
+			}
+			formatted, err := pwd.FormatPassword(raw)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Error formatting password: %v", err), http.StatusInternalServerError)
+				return
+			}
 			passwords[i] = Password{
 				Raw:       raw,
-				Formatted: pwd.FormatPassword(raw),
+				Formatted: formatted,
 			}
 		}
 

@@ -53,10 +53,17 @@ func main() {
 
 	// Generate passwords
 	for i := 0; i < passwordCount; i++ {
-		password := pwd.GeneratePassword(passwordLength, *symbols || *symbolsLong)
+		password, err := pwd.GeneratePassword(passwordLength, *symbols || *symbolsLong)
+		if err != nil {
+			log.Fatalf("Error generating password: %v\n", err)
+		}
 		fmt.Println()
 		fmt.Println(strings.Repeat("-", 40))
 		fmt.Println(password)
-		fmt.Println(pwd.FormatPassword(password))
+		formatted, err := pwd.FormatPassword(password)
+		if err != nil {
+			log.Fatalf("Error formatting password: %v\n", err)
+		}
+		fmt.Println(formatted)
 	}
 }

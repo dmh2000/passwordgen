@@ -2,10 +2,11 @@ package pwd
 
 import (
 	"crypto/rand"
+	"fmt"
 	"strings"
 )
 
-func GeneratePassword(length int, includeSymbols bool) string {
+func GeneratePassword(length int, includeSymbols bool) (string, error) {
 	const (
 		letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		numbers = "0123456789"
@@ -26,25 +27,31 @@ func GeneratePassword(length int, includeSymbols bool) string {
 		randomBytes := make([]byte, 1)
 		_, err := rand.Read(randomBytes)
 		if err != nil {
-			panic(err)
+			return "", fmt.Errorf("error reading random bytes: %w", err)
 		}
 		password[i] = charset[int(randomBytes[0])%charsetLen]
 	}
 
-	return string(password)
+	return string(password), nil
 }
 
-func FormatPassword(password string) string {
+func FormatPassword(password string) (string, error) {
 	var builder strings.Builder
 	for i := 0; i < len(password); i += 3 {
 		if i > 0 {
-			builder.WriteString(" ")
+			_, err := builder.WriteString(" ")
+			if err != nil {
+				return "", fmt.Errorf("error writing space to builder: %w", err)
+			}
 		}
 		end := i + 3
 		if end > len(password) {
 			end = len(password)
 		}
-		builder.WriteString(password[i:end])
+		_, err := builder.WriteString(password[i:end])
+		if err != nil {
+			return "", fmt.Errorf("error writing password to builder: %w", err)
+		}
 	}
-	return builder.String()
+	return builder.String(), nil
 }
