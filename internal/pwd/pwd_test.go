@@ -19,7 +19,10 @@ func TestGeneratePassword(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			password := GeneratePassword(tt.length, tt.includeSymbols)
+			password, err := GeneratePassword(tt.length, tt.includeSymbols)
+			if err != nil {
+				t.Errorf("GeneratePassword() error = %v", err)
+			}
 
 			// Check length
 			if len(password) != tt.length {
@@ -77,7 +80,12 @@ func TestFormatPassword(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FormatPassword(tt.password); got != tt.want {
+			got, err := FormatPassword(tt.password)
+			if err != nil {
+				t.Errorf("FormatPassword() error = %v", err)
+			}
+
+			if got != tt.want {
 				t.Errorf("FormatPassword() = %v, want %v", got, tt.want)
 			}
 		})

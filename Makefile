@@ -1,10 +1,6 @@
 # Default target
 .DEFAULT_GOAL := all
 
-# Build both CLI and web applications
-.PHONY: all
-all: cli web
-
 # Build CLI application
 .PHONY: cli
 cli:
@@ -14,6 +10,12 @@ cli:
 .PHONY: web
 web:
 	cd web && $(MAKE)
+
+# Build both CLI and web applications
+.PHONY: all
+all: cli web
+	cd cmd/cli && $(MAKE) all
+	cd web && $(MAKE) all
 
 # Clean both applications
 .PHONY: clean
