@@ -7,9 +7,16 @@ import (
 	"strings"
 )
 
+// minimum length of password is 24 characters
+const minLength = 24
+
 // GeneratePassword generates a random password of the specified length.
 // It includes letters and numbers by default, and optionally includes symbols if includeSymbols is true.
 func GeneratePassword(length int, includeSymbols bool) (string, error) {
+	if length < minLength {
+		return "", fmt.Errorf("password length must be at least %d characters", minLength)
+	}
+
 	const (
 		letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		numbers = "0123456789"
