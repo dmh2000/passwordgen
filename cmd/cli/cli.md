@@ -1,14 +1,14 @@
 # Password Generator CLI
 
-A command-line utility for generating secure passwords with customizable options.
+A command-line tool for generating secure passwords with customizable options.
 
 ## Features
 
 - Generates passwords with a minimum length of 24 characters
-- Option to include special symbols
-- Supports generating multiple passwords at once
-- Outputs both raw and formatted password versions
-- Provides both short and long-form command flags
+- Optional symbol inclusion
+- Ability to generate multiple passwords at once
+- Both short and long-form command flags
+- Formatted output for better readability
 
 ## Usage
 
@@ -18,30 +18,31 @@ password-generator [-l length] [-c count] [-s] [-h]
 
 ### Flags
 
-- `-l, --length`: Set password length (minimum 24 characters, default: 24)
+- `-l, --length`: Password length (minimum 24 characters, default: 24)
 - `-c, --count`: Number of passwords to generate (default: 1)
 - `-s, --symbols`: Include special symbols in the password
-- `-h, --help`: Display help message
+- `-h, --help`: Display help information
 
 ## Output
 
-For each password generated, the program outputs:
-- A separator line
-- The raw password
-- A formatted version of the password
+The program outputs each generated password in two formats:
+1. Plain format
+2. Formatted version for improved readability
+
+Each password is separated by a line of dashes for clear visual distinction.
 
 ## Example
 
 ```bash
-password-generator -l 30 -c 2 -s
-```
+$ password-generator -l 24 -s -c 1
 
-This command generates 2 passwords, each 30 characters long, including special symbols.
+----------------------------------------
+[Generated password appears here]
+[Formatted version appears here]
+```
 
 ## Notes
 
 - The program enforces a minimum password length of 24 characters for security
-- Both short (-l) and long (--length) format flags are supported
-- If an error occurs during generation or formatting, the program will exit with an error message
-
-The implementation uses a separate package for password generation and formatting logic, keeping the CLI interface focused on user interaction and parameter handling.
+- If both short and long flags are provided, the long flag takes precedence
+- Errors during password generation or formatting will cause the program to exit with an error message

@@ -1,15 +1,15 @@
 # Password Generator Web Service
 
-This is a simple web service that generates secure passwords through a HTTP interface. Written in Go, it provides both a web interface and a JSON API for password generation.
+A Go-based web service that generates secure passwords with customizable parameters. The service provides both a web interface and JSON API endpoints for password generation.
 
 ## Features
 
-- Generates passwords with configurable length (minimum 24 characters)
+- Generate one or multiple passwords
+- Customizable password length (minimum 24 characters)
 - Optional symbol inclusion
-- Ability to generate multiple passwords at once
 - Returns both raw and formatted password versions
-- Web interface for easy access
-- RESTful API endpoint for programmatic access
+- Web interface and API support
+- Static file serving with embedded resources
 
 ## API Endpoints
 
@@ -22,32 +22,30 @@ Generates passwords based on query parameters:
 - `count`: Number of passwords to generate (≥1, defaults to 1)
 - `symbols`: Include symbols (true/false)
 
-Returns JSON in the format:
+Response format:
 ```json
 {
     "passwords": [
         {
-            "raw": "unformatted-password",
-            "formatted": "formatted-password"
+            "raw": "raw_password_string",
+            "formatted": "formatted_password_string"
         }
     ]
 }
 ```
 
-## Running the Service
+## Usage
 
-The service runs on `http://localhost:8080` by default.
-
-## Technical Details
-
-- Uses Go's `embed` package for static file serving
-- Implements template rendering for the web interface
-- Includes error handling for invalid inputs
-- Serves static assets from embedded filesystem
+The server runs on `http://localhost:8080` by default. Access the web interface by opening this URL in your browser, or make API calls to the `/generate` endpoint.
 
 ## Dependencies
 
-- Built-in Go packages
+- Standard Go libraries
 - Custom password generation package (`sqirvy.xyz/passwords/internal/pwd`)
 
-This service is designed to be a secure and reliable password generation solution, suitable for both human users through the web interface and automated systems through the API.
+## Installation
+
+1. Ensure Go is installed on your system
+2. Clone the repository
+3. Run `go run main.go`
+4. Access the service at `http://localhost:8080`

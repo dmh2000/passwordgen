@@ -1,6 +1,6 @@
 import sys
 
-from loader import make_cached_api_call, fetch_code
+from builder import make_cached_api_call, fetch_code
 
 
 def main():

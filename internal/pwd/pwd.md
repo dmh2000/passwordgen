@@ -1,44 +1,49 @@
-# Password Generator Package
+# Password Generation Utility
 
-A Go package that provides secure password generation and formatting utilities.
+A Go package that provides secure password generation and formatting capabilities.
 
 ## Features
 
 - Generates cryptographically secure random passwords
-- Minimum password length of 24 characters for enhanced security
+- Enforces a minimum password length of 24 characters
 - Optional inclusion of special symbols
-- Password formatting utility for better readability
+- Password formatting with spaces for better readability
 
 ## Functions
 
 ### `GeneratePassword(length int, includeSymbols bool) (string, error)`
 
 Generates a random password with the following characteristics:
+- Minimum length of 24 characters
 - Always includes letters (a-z, A-Z) and numbers (0-9)
-- Optionally includes special symbols (!@#$%^&*()-_=+[]{}|;:,.<>?)
-- Returns an error if length is less than 24 characters
+- Optional special symbols (!@#$%^&*()-_=+[]{}|;:,.<>?)
 - Uses crypto/rand for secure random generation
 
 ### `FormatPassword(password string) (string, error)`
 
-Formats a password string by:
+Formats a password by:
 - Adding spaces every 3 characters
-- Making the password more readable and easier to communicate
+- Making the password more readable and easier to transcribe
 
-## Usage Example
+## Example Usage
 
 ```go
-password, err := pwd.GeneratePassword(24, true)
-if err != nil {
-    log.Fatal(err)
-}
+// Generate a 30-character password with symbols
+password, err := pwd.GeneratePassword(30, true)
 
-formatted, err := pwd.FormatPassword(password)
-if err != nil {
-    log.Fatal(err)
-}
+// Format the password with spaces
+formattedPassword, err := pwd.FormatPassword(password)
 ```
 
-## Security Note
+## Security Notes
 
-This package enforces a minimum password length of 24 characters to provide adequate security against brute-force attacks. It uses Go's crypto/rand package for cryptographically secure random number generation.
+- Uses crypto/rand for cryptographically secure random number generation
+- Enforces a minimum length of 24 characters for better security
+- Provides option to include special symbols for increased entropy
+
+## Error Handling
+
+The package includes comprehensive error handling for:
+- Invalid password lengths
+- Random number generation failures
+- String building operations
